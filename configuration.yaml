@@ -1,0 +1,167 @@
+api:
+  host: "0.0.0.0"
+  port: 10006
+  debug: true
+
+pipeline:
+  # Per-batch cap (watchdog). The binding constraint is run_time_budget below.
+  batch_time_budget: 3000
+  # Sum of this repeat's 4 batch wall-clocks must stay under the validator's
+  # TOTAL_GENERATION_TIME_LIMIT of 7200s or the ENTIRE audit is rejected.
+  # 6600s = 92% of the cliff. Chosen so a nominal pod finishes its work rather than
+  # truncating (truncation fails prompts, and >12 failed also rejects). When a pod IS
+  # slower, adaptive_ensemble sheds K until the work fits the budget.
+  run_time_budget: 6600
+  min_batch_budget: 420
+  expected_batches: 4
+  adaptive_ensemble: true
+  min_ensemble_size: 8
+  prompt_timeout: 600.0
+  use_planner: false
+  render_from_object: true
+  refinement_enabled: false
+
+benchmark: true
+warmup: true
+
+llm_clients:
+  openrouter:
+    enabled: false
+    base_url: "https://openrouter.ai/api/v1"
+    api_key_env: "OPENROUTER_API_KEY"
+  coder-instance:
+    enabled: true
+    base_url: "http://localhost:8001/v1"
+    api_key: "local"
+    vllm:
+      model: "Tooony133/Qwen-3.8-27B-DinkyDoo"
+      revision: "511fbd527de68c9816a8fc8c5401c9da80541927"
+      gpu_ids: "0,1,2"
+      tensor_parallel_size: 1
+      data_parallel_size: 3
+      vllm_bin: "/opt/vllm-coder-env/bin/vllm"
+      gpu_memory_utilization: 0.9
+      max_model_len: 81920
+      max_num_seqs: 256
+      extra_args: ["--speculative-config", "{\"method\":\"mtp\",\"num_speculative_tokens\":2}"]
+  judge-critic-instance:
+    enabled: true
+    base_url: "http://localhost:8002/v1"
+    api_key: "local"
+    vllm:
+      model: "zai-org/GLM-4.6V-Flash"
+      revision: "411bb4d77144a3f03accbf4b780f5acb8b7cde4e" 
+      gpu_ids: "3"
+      tensor_parallel_size: 1
+      gpu_memory_utilization: 0.5
+      max_model_len: 81920
+      max_num_seqs: 196
+      vllm_bin: "/opt/vllm-glm-env/bin/vllm"
+      trust_remote_code: true
+      reasoning_parser: null
+
+embedder:
+  revision: "fc6921f7a0b44d5b33ab4482cfed5443db6ccd81"
+
+actors:
+  planner:
+    client: "coder-instance"
+    model: "Tooony133/Qwen-3.8-27B-DinkyDoo"
+    workers: 256
+    queue_size: 128
+    max_tokens: 32768
+    temperature: 0.6
+    top_p: 0.95
+    top_k: 20
+    min_p: 0.0
+    presence_penalty: 0.0
+    repetition_penalty: 1.0
+    seed: 42
+    reasoning_effort: "medium"
+    enable_thinking: false
+    providers:
+      order: []
+      allow_fallbacks: true
+  coder:
+    client: "coder-instance"
+    model: "Tooony133/Qwen-3.8-27B-DinkyDoo"
+    workers: 256
+    queue_size: 128
+    max_tokens: 24576
+    temperature: 0.6
+    top_p: 0.95
+    top_k: 20
+    min_p: 0.0
+    presence_penalty: 0.0
+    repetition_penalty: 1.0
+    seed: 42
+    enable_thinking: false
+    multimodal: true
+    ensemble_size: 12
+    ensemble_temperature: 0.6
+    providers:
+      order: []
+      allow_fallbacks: true
+  patcher:
+    workers: 64
+    queue_size: 64
+  critic:
+    client: "judge-critic-instance"
+    model: "zai-org/GLM-4.6V-Flash"
+    workers: 128
+    queue_size: 64
+    max_tokens: 6144
+    temperature: 0.6
+    top_p: 0.95
+    top_k: 20
+    min_p: 0.0
+    presence_penalty: 0.0
+    repetition_penalty: 1.0
+    seed: 42
+    reasoning_effort: "medium"
+    enable_thinking: false
+    ensemble_size: 1
+    providers:
+      order: []
+      allow_fallbacks: true
+  judge:
+    client: "judge-critic-instance"
+    model: "zai-org/GLM-4.6V-Flash"
+    workers: 128
+    queue_size: 64
+    max_tokens: 8192
+    temperature: 0.0
+    seed: 42
+    providers:
+      order: []
+      allow_fallbacks: true
+  checker:
+    workers: 32
+    queue_size: 32
+  renderer:
+    workers: 16
+    queue_size: 32
+
+event_bus:
+  max_iter: 2
+  task_deadline_s: 3600
+  score_threshold: 0.55
+
+js_checker:
+  execution_timeout_ms: 5000
+  node_binary: "node"
+
+renderer:
+  sidecar_host: "127.0.0.1"
+  sidecar_port: 8003
+  startup_timeout_s: 60.0
+  request_timeout_s: 90.0
+  node_binary: "node"
+  img_size: 518
+  grid_gap: 5
+  bg_color: null
+  lighting: neutral
+  sidecar_count: 8
+  pool_size: 2
+  render_timeout_ms: 60000
+  protocol_timeout_ms: 60000
