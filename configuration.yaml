@@ -88,7 +88,7 @@ actors:
     workers: 256
     queue_size: 128
     max_tokens: 24576
-    temperature: 0.6
+    temperature: 0.3
     top_p: 0.95
     top_k: 20
     min_p: 0.0
@@ -97,8 +97,8 @@ actors:
     seed: 42
     enable_thinking: false
     multimodal: true
-    ensemble_size: 12
-    ensemble_temperature: 0.6
+    ensemble_size: 60
+    ensemble_temperature: 0.3
     providers:
       order: []
       allow_fallbacks: true

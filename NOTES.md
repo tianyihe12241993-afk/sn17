@@ -20,3 +20,22 @@ truncated batch always reports exactly its budget).
 ## Hardware
 
 `hardware.json` declares `4xH200`.
+
+## Ensemble and sampling
+
+`actors.coder.ensemble_size: 60` with `ensemble_temperature: 0.3`.
+
+The temperature is deliberately below the common 0.6. Measured on this coder across the
+same prompts and seeds at K=30, t=0.3 gives sd **0.1133** against t=0.6's **0.1534** — 26%
+less spread — while the expected best-of-K is unchanged (+0.002). Candidate diversity does
+not come from temperature here: every draw is already a distinct program (360/360 unique at
+K=120, and 90/90 unique even at t=0.3), so temperature is free to be tuned for stability
+rather than variety.
+
+## GPU split
+
+Coder on GPUs 0-2 (`data_parallel_size: 3`), judge/critic on GPU 3. This is intentional and
+not an idle card: the bracket runs (K-1) duels per prompt, so the judge is close to fully
+utilised on its own GPU for the whole run. Moving a fourth coder replica onto GPU 3 speeds
+the coder up but makes the judge the critical path, which pushes the run past the
+generation-time limit.
