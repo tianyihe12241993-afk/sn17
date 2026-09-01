@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import gc
 import os
-import time
 
 import httpx
 from openai import AsyncOpenAI
@@ -58,17 +57,6 @@ class GenerationPipeline:
         self._clients: dict[str, AsyncOpenAI] = {}
         self._http_client: httpx.AsyncClient | None = None
         self._pipeline: Pipeline | None = None
-
-        # Run-level time governor. The pod is reused across the batches of one audit
-        # repeat, and across repeats, so the counter resets once a repeat's worth of
-        # batches has been served.
-        self._run_elapsed: float = 0.0
-        self._batches_done: int = 0
-        self._expected_batches: int = int(getattr(settings.pipeline, "expected_batches", 4) or 4)
-        self._last_batch_time: float = 0.0
-        self._last_batch_completed: int = 0
-        self._last_batch_total: int = 0
-        self._configured_ensemble: int = int(settings.actors.coder.ensemble_size)
 
     # Lifecycle
 
@@ -138,40 +126,6 @@ class GenerationPipeline:
             except Exception as exc:
                 logger.warning(f"[Pipeline shutdown] Client {name} close failed: {exc}")
 
-    def _retune_ensemble(self, slice_: float) -> None:
-        """Scale the coder ensemble to what actually fits the time slice.
-
-        Keying off elapsed time does not work: a truncated batch always reports exactly
-        its budget, so time alone can never reveal over-subscription. The observable
-        signal is the COMPLETION RATE. If only 70% of a batch's prompts finished in the
-        slice, the batch was ~1/0.7 over-subscribed, and since wall-clock is dominated by
-        K generations per prompt, K should scale by that same 0.7. A batch that completes
-        fully earns a gradual climb back toward the configured K.
-        """
-        pcfg = self.settings.pipeline
-        if not getattr(pcfg, "adaptive_ensemble", False) or self._pipeline is None:
-            return
-        if self._batches_done == 0 or self._last_batch_total == 0:
-            return
-        rate = self._last_batch_completed / self._last_batch_total
-        k_cfg = self._configured_ensemble
-        k_cur = self._pipeline.coder_ensemble_size
-        if rate >= 0.999:
-            # Finished everything with time to spare — creep back up (10%), never past cfg.
-            headroom = slice_ / max(self._last_batch_time, 1.0)
-            k_next = k_cur if headroom < 1.05 else min(k_cfg, int(round(k_cur * 1.10)))
-        else:
-            k_next = int(round(k_cur * rate))
-        k_next = max(int(pcfg.min_ensemble_size), min(k_cfg, k_next))
-        if k_next != k_cur:
-            logger.warning(
-                f"[Adaptive ensemble] last batch completed "
-                f"{self._last_batch_completed}/{self._last_batch_total} in "
-                f"{self._last_batch_time:.0f}s (slice {slice_:.0f}s) -> K {k_cur} -> {k_next} "
-                f"(cfg {k_cfg}, floor {pcfg.min_ensemble_size})"
-            )
-            self._pipeline.coder_ensemble_size = k_next
-
     def _cleanup_batch_memory(self, context: str) -> None:
         if self._pipeline is None:
             return
@@ -188,20 +142,6 @@ class GenerationPipeline:
         if self._pipeline is None:
             logger.error("[Batch failed] Run called before startup")
             return
-        if self._batches_done >= self._expected_batches:
-            # A new audit repeat: the validator times each repeat separately, so the
-            # run budget starts fresh here.
-            logger.info(
-                f"[Run budget] repeat boundary after {self._batches_done} batches "
-                f"({self._run_elapsed:.0f}s) — resetting run counters"
-            )
-            self._run_elapsed = 0.0
-            self._batches_done = 0
-            self._last_batch_time = 0.0
-            self._last_batch_completed = 0
-            self._last_batch_total = 0
-            if self._pipeline is not None:
-                self._pipeline.coder_ensemble_size = self._configured_ensemble
         if tasks:
             batch_seed = tasks[0].seed
             if self._pipeline.planner is not None:
@@ -218,32 +158,7 @@ class GenerationPipeline:
                 f"critic={self._pipeline.critic.seed}, judge={judge_seed})"
             )
             
-        # Run-level governor. The audit's limit is the SUM of this repeat's batch
-        # wall-clocks, so spend the remaining run budget over the batches still to come
-        # rather than giving every batch the same (huge) per-batch cap.
-        pcfg = self.settings.pipeline
-        run_budget = getattr(pcfg, "run_time_budget", 0.0) or 0.0
-        if run_budget > 0:
-            remaining = run_budget - self._run_elapsed
-            batches_left = max(1, self._expected_batches - self._batches_done)
-            slice_ = remaining / batches_left
-            budget = max(pcfg.min_batch_budget, min(pcfg.batch_time_budget, slice_))
-            logger.info(
-                f"[Run budget] elapsed={self._run_elapsed:.0f}s / {run_budget:.0f}s | "
-                f"batch {self._batches_done + 1}/{self._expected_batches} | "
-                f"slice={slice_:.0f}s -> budget={budget:.0f}s"
-            )
-            if remaining <= pcfg.min_batch_budget:
-                logger.warning(
-                    f"[Run budget] only {remaining:.0f}s left of the {run_budget:.0f}s run "
-                    f"budget — this batch runs at the floor to protect the 7200s audit limit"
-                )
-        else:
-            budget = pcfg.batch_time_budget
-
-            self._retune_ensemble(slice_)
-
-        _batch_start = time.monotonic()
+        budget = self.settings.pipeline.batch_time_budget
 
         async def run_one(task: PipelineTask) -> None:
             while True:
@@ -277,19 +192,6 @@ class GenerationPipeline:
         except asyncio.CancelledError:
             raise
         finally:
-            self._last_batch_time = time.monotonic() - _batch_start
-            self._last_batch_total = len(tasks)
-            self._last_batch_completed = sum(
-                1 for t in tasks
-                if (r := self.state.tasks.get(t.stem)) is not None
-                and not r.failed and r.js_code
-            )
-            self._run_elapsed += self._last_batch_time
-            self._batches_done += 1
-            logger.info(
-                f"[Run budget] batch {self._batches_done} done | "
-                f"run elapsed {self._run_elapsed:.0f}s"
-            )
             self._cleanup_batch_memory("Batch")
             logger.info(
                 f"[Batch done] {len(self.state.results)} ok, "

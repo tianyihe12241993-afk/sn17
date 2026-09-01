@@ -4,18 +4,12 @@ api:
   debug: true
 
 pipeline:
-  # Per-batch cap (watchdog). The binding constraint is run_time_budget below.
-  batch_time_budget: 3000
-  # Sum of this repeat's 4 batch wall-clocks must stay under the validator's
-  # TOTAL_GENERATION_TIME_LIMIT of 7200s or the ENTIRE audit is rejected.
-  # 6600s = 92% of the cliff. Chosen so a nominal pod finishes its work rather than
-  # truncating (truncation fails prompts, and >12 failed also rejects). When a pod IS
-  # slower, adaptive_ensemble sheds K until the work fits the budget.
-  run_time_budget: 6600
-  min_batch_budget: 420
-  expected_batches: 4
-  adaptive_ensemble: true
-  min_ensemble_size: 8
+  # Watchdog only. The 7200s audit ceiling is governed by ensemble_size, not by a
+  # software timer: our own run-budget governor gave batch 1 a 1530s deadline against
+  # batches that measurably take 1583-1813s, truncating them into failed prompts
+  # (>12 failed rejects the repeat). Anchor: TuttiGenerator/wertox @1276786 ran this
+  # exact tree at K=60 in 6481-6673s over 3 repeats on 4xH200 and PASSED the r38 audit.
+  batch_time_budget: 14400
   prompt_timeout: 600.0
   use_planner: false
   render_from_object: true
@@ -88,7 +82,7 @@ actors:
     workers: 256
     queue_size: 128
     max_tokens: 24576
-    temperature: 0.3
+    temperature: 0.6
     top_p: 0.95
     top_k: 20
     min_p: 0.0
@@ -97,8 +91,8 @@ actors:
     seed: 42
     enable_thinking: false
     multimodal: true
-    ensemble_size: 60
-    ensemble_temperature: 0.3
+    ensemble_size: 12
+    ensemble_temperature: 0.6
     providers:
       order: []
       allow_fallbacks: true

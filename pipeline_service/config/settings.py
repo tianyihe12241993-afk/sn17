@@ -26,26 +26,6 @@ class APIConfig(BaseModel):
 class PipelineConfig(BaseModel):
     batch_time_budget: float = 1800.0
     prompt_timeout: float = 120.0
-    # The validator sums this pod's batch wall-clocks per audit repeat and REJECTS the
-    # whole audit above TOTAL_GENERATION_TIME_LIMIT (7200s) — see generation_summary.py
-    # in the subnet repo. `batch_time_budget` is per batch, so it cannot protect that
-    # ceiling: 4 batches x 14400s allows 57600s against a 7200s cliff. `run_time_budget`
-    # governs the sum across all batches of a repeat and is the guard that actually
-    # matters. 23 of 77 recorded audit failures were this limit, several with zero
-    # failed prompts.
-    run_time_budget: float = 5700.0
-    # Floor on the adaptive per-batch slice, so a slow first batch cannot starve the rest.
-    min_batch_budget: float = 420.0
-    # Batches per audit repeat (128 prompts / BATCH_SIZE 32). Used to slice the run
-    # budget and to detect a repeat boundary so the counter resets.
-    expected_batches: int = 4
-    # Truncating a batch at the deadline marks its unfinished prompts FAILED, and >12
-    # failed prompts in a repeat rejects the audit just as surely as running long. So the
-    # governor must shed WORK, not time: the ensemble size (K candidates per prompt, the
-    # dominant cost) is scaled down when a batch runs behind its slice. Quality degrades
-    # instead of the run dying.
-    adaptive_ensemble: bool = True
-    min_ensemble_size: int = 8
     use_planner: bool = True
     render_from_object: bool = False
     # When false, disables the whole refinement loop: the critic and every
