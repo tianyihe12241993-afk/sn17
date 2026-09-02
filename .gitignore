@@ -17,4 +17,4 @@ results
 # Tests
 tests/**/*.js
 tests/**/*.png
-tests/**/*.json
+tests/**/*.jsonlogs/

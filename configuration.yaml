@@ -55,7 +55,12 @@ llm_clients:
       reasoning_parser: null
 
 embedder:
-  revision: "fc6921f7a0b44d5b33ab4482cfed5443db6ccd81"
+  # Our own mirror of Tooony133/dinov3-vits16-pretrain-lvd1689m @fc6921f7 (itself a byte-identical
+  # re-upload of facebook/dinov3-vits16-pretrain-lvd1689m). model.safetensors sha256 verified equal.
+  # Pinned here, in the audited artifact, because Tooony133 is a rival account that has already
+  # privated one repo (SkinnyPete -> 401): run.sh downloads at pod start and a 401 is a dead round.
+  model_id: "Tony-00316/dinov3-vits16-pretrain-lvd1689m"
+  revision: "dc7892421427bbeabbaf0921e067e1d31bc1fe7f"
 
 actors:
   planner:

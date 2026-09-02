@@ -1,0 +1,118 @@
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1505 | t R1 k0-vs-k1: S2 -> draw via consensus [bv=None,ac=None,cl=None] (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1546 | t R1 k0-vs-k1: S3 -> no_change (fired=True, 0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1569 | t R1 k0-vs-k1: S4 -> draw (applied=False, primary=draw, 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1578 | t R1 k0-vs-k1: winner=draw (decided by S3 (gate did not fire) -> draw, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S3 (gate did not fire) -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1505 | t R1 k0-vs-k1: S2 -> draw via consensus [bv=None,ac=None,cl=None] (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1546 | t R1 k0-vs-k1: S3 -> no_change (fired=True, 0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1569 | t R1 k0-vs-k1: S4 -> draw (applied=False, primary=draw, 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1578 | t R1 k0-vs-k1: winner=draw (decided by S3 (gate did not fire) -> draw, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S3 (gate did not fire) -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1505 | t R1 k0-vs-k1: S2 -> draw via consensus [bv=None,ac=None,cl=None] (0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1546 | t R1 k0-vs-k1: S3 -> no_change (fired=True, 0.0s)
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1569 | t R1 k0-vs-k1: S4 -> draw (applied=False, primary=draw, 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1578 | t R1 k0-vs-k1: winner=draw (decided by S3 (gate did not fire) -> draw, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S3 (gate did not fire) -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 0/0
+2026-09-01 15:06:35 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_left', skipping angle
+2026-09-01 15:06:35 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_right', skipping angle
+2026-09-01 15:06:35 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_below', skipping angle
+2026-09-01 15:06:35 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_above', skipping angle
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:35 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:35 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> A (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1458 | t R1 k0-vs-k1: winner=left (decided by S1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=left -> A | decided_by=S1 | confidence=0.85 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> A (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1458 | t R1 k0-vs-k1: winner=left (decided by S1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=left -> A | decided_by=S1 | confidence=0.85 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> A (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1458 | t R1 k0-vs-k1: winner=left (decided by S1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=left -> A | decided_by=S1 | confidence=0.85 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> A (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1458 | t R1 k0-vs-k1: winner=left (decided by S1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=left -> A | decided_by=S1 | confidence=0.85 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1505 | t R1 k0-vs-k1: S2 -> draw via consensus [bv=None,ac=None,cl=None] (0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1546 | t R1 k0-vs-k1: S3 -> no_change (fired=True, 0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1569 | t R1 k0-vs-k1: S4 -> draw (applied=False, primary=draw, 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1578 | t R1 k0-vs-k1: winner=draw (decided by S3 (gate did not fire) -> draw, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S3 (gate did not fire) -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=4 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1505 | t R1 k0-vs-k1: S2 -> draw via consensus [bv=None,ac=None,cl=None] (0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1546 | t R1 k0-vs-k1: S3 -> no_change (fired=True, 0.0s)
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1569 | t R1 k0-vs-k1: S4 -> draw (applied=False, primary=draw, 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1578 | t R1 k0-vs-k1: winner=draw (decided by S3 (gate did not fire) -> draw, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S3 (gate did not fire) -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 0/0
+2026-09-01 15:06:57 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_left', skipping angle
+2026-09-01 15:06:57 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_right', skipping angle
+2026-09-01 15:06:57 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_below', skipping angle
+2026-09-01 15:06:57 | WARNING  | modules.judge.multi_stage:_s1_run:640 | S1: missing white view 'front_above', skipping angle
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:121 | [Judge R1 k0-vs-k1] Started Task t | Model: zai-org/GLM-4.6V-Flash | max_stage=1 | Ref KB: 0.1 | A KB: 0.1 | B KB: 0.1 | white A/B: 4/4
+2026-09-01 15:06:57 | DEBUG    | modules.judge.multi_stage:evaluate_duel:1453 | t R1 k0-vs-k1: S1 -> draw (0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.multi_stage:evaluate_duel:1467 | t R1 k0-vs-k1: winner=draw (S1, max_stage=1, duel 0.0s)
+2026-09-01 15:06:57 | INFO     | modules.judge.agent:compare:165 | [Judge R1 k0-vs-k1] Finished Task t | duel_winner=draw -> A | decided_by=S1 -> draw | draw -> A (no DINO signal) | confidence=0.50 | reason=explain-ran
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k0-vs-k1] s -> k1 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k2-vs-k3] s -> k3 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k4-vs-k5] s -> k5 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k6-vs-k7] s -> k7 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k1-vs-k3] s -> k3 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k5-vs-k7] s -> k7 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R3 k3-vs-k7] s -> k7 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k0-vs-k1] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k2-vs-k3] s -> k2 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k4-vs-k5] s -> k4 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k6-vs-k7] s -> k6 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k0-vs-k2] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k4-vs-k6] s -> k4 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R3 k0-vs-k4] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k0-vs-k1] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k2-vs-k3] s -> k2 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k4-vs-k5] s -> k4 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R1 k6-vs-k7] s -> k6 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k0-vs-k2] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k4-vs-k6] s -> k4 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R3 k0-vs-k4] s -> k0 | rule=verdict | s1_margin=NA | verdict=A | decided_by=
+2026-09-01 15:13:05 | INFO     | pipeline.stages_patched:_judge_duel:296 | [BRACKET R2 k0-vs-k3] s -> k3 | rule=s1_margin | s1_margin=+4.000 | verdict=A | decided_by=S1
+2026-09-01 15:16:08 | INFO     | __main__:<module>:5 | [BRACKET R1 k0-vs-k1] stem -> k0 | rule=s1_margin | s1_margin=+0.125 | verdict=A | decided_by=S2 strong_voter [bv|-2.0|] {evil} {0} %s
